@@ -1,0 +1,863 @@
+<html>
+<!--
+Done by: 
+Terence Tan Boon Kiat
+2228167T
+
+Declaration:
+This is my own work except that the following were used as references:
+1 Simple Scientific Calculator https://markuprecipes.wordpress.com/2013/09/29/simple-scientific-calculator-using-html-javascript-and-css/
+2 An Interactive Visualisation of Fitts's Law with JavaScript and D3 http://www.simonwallner.at/ext/fitts/
+3 D3 Scatterplot Example by weiglemc http://bl.ocks.org/weiglemc/6185069
+-->
+<style>
+.main
+{
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	padding: 14px 10px 14px;
+}
+.symbol1
+{
+	width: 60px;
+    height: 60px;
+	text-align: center;
+	margin: 2px;
+	border: none;
+	outline: none;
+	font-size: 110%;
+	font-family: "Times New Roman"
+}
+.symbol1:hover
+{
+	background-color: #AF9F57;
+}
+.symbol1:active {
+	background-color: #F4DC7A;
+}
+.symbol2
+{
+	width: 60px;
+    height: 60px;
+	text-align: center;
+	margin: 2px;
+	font-weight: bold;
+	border: none;
+	outline: none;
+	font-size: 110%;
+	font-family: "Times New Roman"
+}
+.symbol2:hover
+{
+	background-color: #AF9F57;
+}
+.symbol2:active {
+	background-color: #F4DC7A;
+}
+.number
+{
+	width: 60px;
+    height: 60px;
+	text-align: center;
+	padding: 6px;
+	margin: 2px;
+	font-weight: bold;
+	border: none;
+	outline: none;
+}
+.number:hover
+{
+	background-color: #AF9F57;
+}
+.number:active {
+	background-color: #F4DC7A;
+}
+.radio1
+{
+	width: 20px;
+    height: 20px;
+	text-align: center;
+	margin-top: -1px;
+	vertical-align: middle;
+}
+.sinbtn
+{
+	width: 60px;
+    height: 60px;
+	text-align: center;
+	margin: 2px;
+	padding: 6px;
+	border: none;
+	outline: none;
+}
+.sinbtn:hover
+{
+	background-color: #AF9F57;
+}
+.sinbtn:active {
+	background-color: #F4DC7A;
+}
+.asinbtn
+{
+	width: 60px;
+    height: 60px;
+	text-align: center;
+	margin: 2px;
+	padding: 6px;
+	border: none;
+	outline: none;
+	display: none;
+}
+.asinbtn:hover
+{
+	background-color: #AF9F57;
+}
+.asinbtn:active {
+	background-color: #F4DC7A;
+}
+.cosbtn
+{
+	width: 60px;
+    height: 60px;
+	text-align: center;
+	margin: 2px;
+	padding: 6px;
+	border: none;
+	outline: none;
+}
+.cosbtn:hover
+{
+	background-color: #AF9F57;
+}
+.cosbtn:active {
+	background-color: #F4DC7A;
+}
+.acosbtn
+{
+	width: 60px;
+    height: 60px;
+	text-align: center;
+	margin: 2px;
+	padding: 6px;
+	border: none;
+	outline: none;
+	display: none;
+}
+.acosbtn:hover
+{
+	background-color: #AF9F57;
+}
+.acosbtn:active {
+	background-color: #F4DC7A;
+}
+.tanbtn
+{
+	width: 60px;
+    height: 60px;
+	text-align: center;
+	margin: 2px;
+	padding: 6px;
+	border: none;
+	outline: none;
+}
+.tanbtn:hover
+{
+	background-color: #AF9F57;
+}
+.tanbtn:active {
+	background-color: #F4DC7A;
+}
+.atanbtn
+{
+	width: 60px;
+    height: 60px;
+	text-align: center;
+	margin: 2px;
+	padding: 6px;
+	border: none;
+	outline: none;
+	display: none;
+}
+.atanbtn:hover
+{
+	background-color: #AF9F57;
+}
+.atanbtn:active {
+	background-color: #F4DC7A;
+}
+.button1
+{
+	width: 60px;
+    height: 60px;
+	text-align: center;
+	margin: 2px;
+	padding: 6px;
+	border: none;
+	outline: none;
+}
+.button1:hover
+{
+	background-color: #AF9F57;
+}
+.button1:active {
+	background-color: #F4DC7A;
+}
+.button2
+{
+	width: 128px;
+    height: 60px;
+	text-align: center;
+	margin: 2px;
+	font-weight: bold;
+	font-size: 110%;
+	font-family: "Times New Roman";
+	border: none;
+	outline: none;
+}
+.button2:hover
+{
+	background-color: #AF9F57;
+}
+.button2:active {
+	background-color: #F4DC7A;
+}
+.button3
+{
+	width: 128px;
+    height: 60px;
+	text-align: center;
+	padding: 6px;
+	margin: 2px;
+	border: none;
+	outline: none;
+}
+.button3:hover
+{
+	background-color: #AF9F57;
+}
+.button3:active {
+	background-color: #F4DC7A;
+}
+.button4
+{
+	width: 60px;
+    height: 60px;
+	text-align: center;
+	padding: 6px;
+	margin: 2px;
+	font-weight: bold;
+	border: none;
+	outline: none;
+}
+.button4:hover
+{
+	background-color: #AF9F57;
+}
+.button4:active {
+	background-color: #F4DC7A;
+}
+.button5
+{
+	width: 128px;
+    height: 60px;
+	text-align: center;
+	padding: 6px;
+	margin: 2px;
+	border: none;
+	outline: none;
+}
+.button5:hover
+{
+	background-color: #AF9F57;
+}
+.button5:active {
+	background-color: #F4DC7A;
+}
+.button6
+{
+	width: 300px;
+    height: 60px;
+	text-align: center;
+	padding: 6px;
+	margin: 2px;
+	border: none;
+	outline: none;
+}
+.button6:hover
+{
+	background-color: #AF9F57;
+}
+.button6:active {
+	background-color: #F4DC7A;
+}
+.box
+{
+	width: 620px;
+    height: 60px;
+	text-align: center;
+	padding: 6px;
+	margin: 2px;
+	margin-bottom: 10px;
+	font-size: 150%;
+	font-weight: bold;
+}
+.outputbox
+{
+	position: absolute;
+	top: 10px;
+	left: 1000px;
+	width: 250px;
+    height: 400px;
+	text-align: center;
+	padding: 6px;
+	margin: 2px;
+	font-size: 100%;
+	border: 0px;
+}
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.dot {
+  stroke: #000;
+}
+
+.tooltip {
+  position: absolute;
+  width: 200px;
+  height: 28px;
+  pointer-events: none;
+}
+</style>
+
+<body>
+
+
+<div>
+	<textarea id="output" class="outputbox" readonly="">Output Box</textarea>
+</div>
+
+<form name="calc">
+
+<div class="main" id="main">
+		<div>
+			<input type="text" class="box" id="screen" name="screen" readonly="">
+		</div>
+	<div onclick="showCoords(event)">
+		<div>
+			<input type="button" class="symbol1" value="^" onclick="calc.screen.value+='^'">
+			<input type="button" class="button1" value="EXP" onclick="calc.screen.value+='exp('">
+			<input type="button" class="button1" id="log "value="log" onclick="calc.screen.value+='log('">
+			<input type="button" class="button1" id="ln" value="ln" onclick="calc.screen.value+='ln('">
+			&nbsp;
+			<input type="button" class="number" value="7" onclick="calc.screen.value+='7'">
+			<input type="button" class="number" value="8" onclick="calc.screen.value+='8'">
+			<input type="button" class="number" value="9" onclick="calc.screen.value+='9'">
+			&nbsp;
+			<input type="button" class="button4" value="(" onclick="calc.screen.value+='('">
+			<input type="button" class="button4" value=")" onclick="calc.screen.value+=')'">
+		</div>
+		<div>
+			<input type="button" class="button1" value="x!" onclick="calc.screen.value='factorial('">
+			<input type="button" class="button1" value="ANS" onclick="calc.screen.value=ans1(calc.screen.value)">
+			<input type="button" class="button1" value="CE" onclick="calc.screen.value=''">
+			<input type="button" class="button1" value="C" onclick="calc.screen.value=calc.screen.value.slice(0,((calc.screen.value.length)-1))">
+			&nbsp;
+			<input type="button" class="number" value="4" onclick="calc.screen.value+='4'">
+			<input type="button" class="number" value="5" onclick="calc.screen.value+='5'">
+			<input type="button" class="number" value="6" onclick="calc.screen.value+='6'">
+			&nbsp;
+			<input type="button" class="symbol2" value="+" onclick="calc.screen.value+='+'">
+			<input type="button" class="symbol2" value="&times;" onclick="calc.screen.value+='*'">
+		</div>
+		<div>
+			<input type="button" class="button1" value="x&sup2;" onclick="calc.screen.value+='^2'">
+			<input type="button" class="button1" value="&radic;" onclick="calc.screen.value+='sqrt('">
+			<input type="button" class="button1" value="%" onclick="calc.screen.value+='/100'">
+			<input type="button" class="button1" value="e" onclick="calc.screen.value+='2.71828182846'">
+			&nbsp;
+			<input type="button" class="number" value="1" onclick="calc.screen.value+='1'">
+			<input type="button" class="number" value="2" onclick="calc.screen.value+='2'">
+			<input type="button" class="number" value="3" onclick="calc.screen.value+='3'">
+			&nbsp;
+			<input type="button" class="symbol2" value="&#8211;" onclick="calc.screen.value+='-'">
+			<input type="button" class="symbol2" value="&divide;" onclick="calc.screen.value+='/'">
+		</div>
+		<div>
+			<input type="button" class="symbol1" value="&pi;" onclick="calc.screen.value+=Math.PI">
+			<input type="button" class="sinbtn" id="sin" value="sin"  onclick="calc.screen.value+='sin('"><input type="button" class="asinbtn" id="asin" value="asin"  onclick="calc.screen.value+='asin('">
+			<input type="button" class="cosbtn" id="cos" value="cos" onclick="calc.screen.value+='cos('"><input type="button" class="acosbtn" id="acos" value="acos" onclick="calc.screen.value+='acos('">
+			<input type="button" class="tanbtn" id="tan" value="tan" onclick="calc.screen.value+='tan('"><input type="button" class="atanbtn" id="atan" value="atan" onclick="calc.screen.value+='atan('">
+			&nbsp;
+			<input type="button" class="button4" value="." onclick="calc.screen.value+='.'">
+			<input type="button" class="number" value="0" onclick="calc.screen.value+='0'">
+			<input type="button" class="button4" value="&plusmn;" onclick="calc.screen.value=eval((calc.screen.value)*(-1))">
+			&nbsp;
+			<input type="button" class="button2" value="=" onclick="calc.screen.value=calculate(calc.screen.value)">
+		</div>
+		<div style="margin-top: 10px;">
+			<input type="button" class="button5" value="Inverse" id="inv" onclick="inverse()">
+			<input type="radio" class="radio1" name="radiodr" value="Degree" id="d" checked="checked">Degree
+			<input type="radio" class="radio1" name="radiodr" value="Radians" id="r">Radians
+		</div>
+	</div>
+		<div style="margin-top: 10px;">
+			<input type="button" class="button6" value="Generate Task" onclick="task()">
+			<input type="button" class="button6" value="Generate Scatter Graph" onclick="draw()">
+		</div>
+</div>
+</form>
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<script>
+
+function factorial(x)
+{
+    var i1=x;
+    
+    if(i1==0 || i1==1)
+    {
+        return(1)
+    }
+    
+    else
+    {    
+    while(i1>1 && x%1==0)
+    {
+        x=x*(i1-1);
+        i1--;
+    }
+    return(x);
+    }
+};
+
+var i=2;
+var ans=0;
+var inversed=0;
+
+var d=document.getElementById("d");
+var r=document.getElementById("r"); 
+var btnsin=document.getElementById("sin");
+var btnasin=document.getElementById("asin");
+var btncos=document.getElementById("cos");
+var btnacos=document.getElementById("acos");
+var btntan=document.getElementById("tan");
+var btnatan=document.getElementById("atan");
+var time = performance.now();
+var counter = 0;
+var selected_value  = new Array();
+var selected_width = new Array();
+var selected_height = new Array();
+var x = new Array();
+var y = new Array();
+var distance = new Array();
+var indexDiff = new Array();
+var data = new Array();
+var p = new Array();
+var button;
+
+
+function showCoords(event) {
+	var successCount = 0;
+	var failCount = 0;
+	var coords = "";
+    x[counter] = event.clientX;
+    y[counter] = event.clientY;
+	selected_value[counter] =  event.target.value;
+	selected_width[counter] =  event.target.offsetWidth;
+	selected_height[counter] =  event.target.offsetHeight;
+	var pp = performance.now() - time;
+	time = performance.now();
+	p[counter] = Math.round(pp);
+
+	for (var i = 0; i <= counter; i++)
+	{
+		if (selected_value[i] !== undefined)
+		{
+			if (i == 0){
+				distance[i] = calculateDistance(x[i], x[i], y[i], y[i]);
+				indexDiff[i] = calculateID(distance[i], selected_width[i]);
+				data[i] = {btn: selected_value[i], time: p[i], id: indexDiff[i]};
+			}
+			else{
+				distance[i] = calculateDistance(x[i-1], x[i], y[i-1], y[i]);
+				indexDiff[i] = calculateID(distance[i], selected_width[i]);
+				data[i] = {btn: selected_value[i], time: p[i] , id: indexDiff[i]};
+			}
+			coords += "Button clicked:'" + selected_value[i] + "' " + "Time:" + p[i] + "ms\n\n";
+			successCount++;
+		}
+		else
+		{
+			coords += "Missed!\n" + "time:" + p[i] + "ms\n\n";
+			data[i] = {btn: "missed", time: p[i] , id: 0};
+			failCount++;
+		}
+	}
+	counter++;
+    document.getElementById("output").value = "Hit: " + successCount + " Missed: " + failCount + "\n\n" + coords;
+}
+
+function calculateDistance(x1, x2, y1, y2) {
+	return Math.floor(Math.sqrt(Math.pow((x1 - x2), 2) + Math.pow((y1 - y2), 2)));
+}
+
+function calculateID(d, w) {
+	return Math.log2((d/w) + 1);
+}
+
+function inverse()
+{
+    
+    var element=document.getElementById("inv");
+    
+    if(i%2==0)
+    {
+        element.style.backgroundColor="#2877B7";
+        i++;
+        inversed=1;
+        btnsin.style.display="none";
+		btnasin.style.display="inline";
+        btncos.style.display="none";
+		btnacos.style.display="inline";
+        btntan.style.display="none";
+		btnatan.style.display="inline";
+    }
+    else
+    {
+        element.style.backgroundColor="#677074";
+        i--;
+        inversed=0;
+		btnasin.style.display="none";
+        btnsin.style.display="inline";
+        btnacos.style.display="none";
+		btncos.style.display="inline";
+        btnatan.style.display="none";
+		btntan.style.display="inline";
+    }
+    
+}
+
+function sin(input)
+{
+    var temp=input;
+    var result;
+
+        if(d.checked)
+        {
+            temp=(temp*Math.PI)/180;
+            result=Math.sin(temp);
+            return(result);
+        }
+        else
+        {
+            result=Math.sin(temp);
+            return(result);
+        }
+}
+
+function asin(input)
+{
+    var temp=input;
+    var result;
+	
+	    if(1>=temp && -1<=temp)
+        {
+            if(d.checked)
+            {
+                result=((Math.asin(temp))*180)/(Math.PI);
+                return(result);
+            }
+            else
+            {
+                result=Math.asin(temp);
+                return(result);
+            }
+        }
+		else
+			return "asin value must be between 1 and -1";
+}
+
+function cos(input)
+{
+    var temp=input;
+    var result;
+
+        if(d.checked)
+        {
+            temp=(temp*Math.PI)/180;
+            result=Math.cos(temp);
+            return(result);
+        }
+        else
+        {
+            result=Math.cos(temp);
+            return(result);
+        }
+}
+
+function acos(input)
+{
+    var temp=input;
+    var result;
+	
+        if(1>=temp && -1<=temp)
+        {
+            if(d.checked)
+            {
+                result=((Math.acos(temp))*180)/(Math.PI);
+                return(result);
+            }
+            else
+            {
+                result=Math.acos(temp);
+                return(result);
+            }
+        }
+		else
+			return "acos value must be between 1 and -1";
+}
+
+function tan(input)
+{
+    var temp=input;
+    var result;
+    
+    if(inversed==0)
+    {
+        if(d.checked)
+        {
+            temp=(temp*Math.PI)/180;
+            result=Math.tan(temp);
+            return(result);
+        }
+        else
+        {
+            result=Math.tan(temp);
+            return(result);
+        }
+    }
+}
+
+function atan(input)
+{
+    var temp=input;
+    var result;
+
+        if(d.checked)
+        {
+            result=((Math.atan(temp))*180)/(Math.PI);
+            return(result);
+        }
+        else
+        {
+            result=Math.atan(temp);
+            return(result);
+        }
+}
+
+function log(input)
+{
+	return Math.log(input)/Math.LN10;
+}
+
+function ln(input)
+{
+	return Math.log(input);
+}
+
+function sqrt(input)
+{
+	return Math.sqrt(input);
+}
+
+function exp(input)
+{
+	return Math.exp(input);
+}
+
+function calculate(input)
+{
+	var temp = input;
+    var powerIndex = temp.indexOf("^");
+    if(powerIndex >= 0)
+    {
+        var temp2 = parseFloat(eval(temp.slice(0,(powerIndex))));
+        var temp3 = parseFloat(eval(temp.slice((powerIndex+1),(temp.length))));
+        var temp4 = Math.pow(temp2,temp3);
+		
+        return(temp4);
+    }
+    else
+    {
+        var temp5 = 1;
+        var temp6;
+        temp6 = eval(temp);
+    
+        if(temp5 == 1)
+        {
+            ans = temp6;
+            temp5 = 0;
+        }
+		
+        return(temp6);
+    }
+}
+
+function ans1(input)
+{
+    return(ans);
+}
+
+function task() {
+	var number = new Array();
+	var boperator = new Array();
+	var operator = new Array();
+	var operator2 = new Array();
+	var opArr = [' ln(', ' log(', ' tan(', ' sin(', ' cos(', ' exp(', ' !(', ' asin(', ' acos(', ' atan('];
+	var opArr2 = [' e ', ' π '];
+	var bopArr = [' x ', ' / ', ' + ', ' - '];
+	var i;
+	for(i = 0; i < 3; i++)
+	{	
+		number[i] = Math.floor((Math.random() * 100) + 1);
+		boperator[i] = bopArr[Math.floor(Math.random() * bopArr.length)];
+		operator[i] = opArr[Math.floor(Math.random() * opArr.length)];
+		operator2[i] = opArr2[Math.floor(Math.random() * opArr2.length)];
+	}	
+		var question = number[0] + boperator[0] + operator[0] + number[1] + ")" + boperator[1] + operator[1] + number[2] + ")" + boperator[2] + operator2[0] ;
+		document.getElementById("output").value = "New task: \n" + question;
+}
+
+function draw()
+{
+	document.getElementById("main").style.display = 'none';
+	var margin = {top: 20, right: 20, bottom: 30, left: 60},
+		width = 800 - margin.left - margin.right,
+		height = 400 - margin.top - margin.bottom;
+
+	/* 
+	 * value accessor - returns the value to encode for a given data object.
+	 * scale - maps value to a visual display encoding, such as a pixel position.
+	 * map function - maps from data value to display value
+	 * axis - sets up axis
+	 */ 
+
+	// setup x 
+	var xValue = function(d) { return d.id;}, // data -> value
+		xScale = d3.scale.linear().range([0, width]), // value -> display
+		xMap = function(d) { return xScale(xValue(d));}, // data -> display
+		xAxis = d3.svg.axis().scale(xScale).orient("bottom");
+
+	// setup y
+	var yValue = function(d) { return d.time;}, // data -> value
+		yScale = d3.scale.linear().range([height, 0]), // value -> display
+		yMap = function(d) { return yScale(yValue(d));}, // data -> display
+		yAxis = d3.svg.axis().scale(yScale).orient("left");
+
+	// setup fill color
+	var cValue = function(d) { return d.btn;},
+		color = d3.scale.category10();
+
+	// add the graph canvas to the body of the webpage
+	var svg = d3.select("body").append("svg")
+		.attr("width", width + margin.left + margin.right)
+		.attr("height", height + margin.top + margin.bottom)
+	  .append("g")
+		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+	// add the tooltip area to the webpage
+	var tooltip = d3.select("body").append("div")
+		.attr("class", "tooltip")
+		.style("opacity", 0);
+
+	// load data
+	// change string (from CSV) into number format
+	data.forEach(function(d) {
+		d.time = +d.time;
+		d.id = +d.id;
+	//    console.log(d);
+	  });
+
+	  // don't want dots overlapping axis, so add in buffer to data domain
+	  xScale.domain([d3.min(data, xValue)-1, d3.max(data, xValue)+1]);
+	  yScale.domain([d3.min(data, yValue)-1, d3.max(data, yValue)+1]);
+
+	  // x-axis
+	  svg.append("g")
+		  .attr("class", "x axis")
+		  .attr("transform", "translate(0," + height + ")")
+		  .call(xAxis)
+		.append("text")
+		  .attr("class", "label")
+		  .attr("x", width)
+		  .attr("y", -6)
+		  .style("text-anchor", "end")
+		  .text("Index of difficulty");
+
+	  // y-axis
+	  svg.append("g")
+		  .attr("class", "y axis")
+		  .call(yAxis)
+		.append("text")
+		  .attr("class", "label")
+		  .attr("transform", "rotate(-90)")
+		  .attr("y", 6)
+		  .attr("dy", ".71em")
+		  .style("text-anchor", "end")
+		  .text("Time (ms)");
+
+	  // draw dots
+	  svg.selectAll(".dot")
+		  .data(data)
+		.enter().append("circle")
+		  .attr("class", "dot")
+		  .attr("r", 3.5)
+		  .attr("cx", xMap)
+		  .attr("cy", yMap)
+		  .style("fill", function(d) { return color(cValue(d));}) 
+		  .on("mouseover", function(d) {
+			  tooltip.transition()
+				   .duration(200)
+				   .style("opacity", .9);
+			  tooltip.html(d["Button Name"] + "<br/> (" + xValue(d) 
+				+ ", " + yValue(d) + ")")
+				   .style("left", (d3.event.pageX + 5) + "px")
+				   .style("top", (d3.event.pageY - 28) + "px");
+		  })
+		  .on("mouseout", function(d) {
+			  tooltip.transition()
+				   .duration(500)
+				   .style("opacity", 0);
+		  });
+
+	  // draw legend
+	  var legend = svg.selectAll(".legend")
+		  .data(color.domain())
+		.enter().append("g")
+		  .attr("class", "legend")
+		  .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+
+	  // draw legend colored rectangles
+	  legend.append("rect")
+		  .attr("x", width - 18)
+		  .attr("width", 18)
+		  .attr("height", 18)
+		  .style("fill", color);
+
+	  // draw legend text
+	  legend.append("text")
+		  .attr("x", width - 24)
+		  .attr("y", 9)
+		  .attr("dy", ".35em")
+		  .style("text-anchor", "end")
+		  .text(function(d) { return d;})
+}
+</script>
+</body>
+</html>
